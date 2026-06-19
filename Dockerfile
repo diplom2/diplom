@@ -28,13 +28,15 @@ RUN sed -ri -e "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-av
 RUN sed -ri -e "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # 6. Устанавливаем .htaccess для корректной маршрутизации
-RUN printf '%s\n' "<Directory ${APACHE_DOCUMENT_ROOT}>" \
-    '  Options -MultiViews' \
-    '  RewriteEngine On' \
-    '  RewriteCond %{REQUEST_FILENAME} !-f' \
-    '  RewriteCond %{REQUEST_FILENAME} !-d' \
-    '  RewriteRule ^ index.php [QSA,L]' \
-    '</Directory>' > /etc/apache2/conf-available/rewrite.conf && \
-    a2enconf rewrite
+RUN cat <<'EOF' >/etc/apache2/conf-available/rewrite.conf
+<Directory /var/www/html/public>
+  Options -MultiViews
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.php [QSA,L]
+</Directory>
+EOF
+RUN a2enconf rewrite
 
 EXPOSE 80
