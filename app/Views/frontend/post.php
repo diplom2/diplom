@@ -61,7 +61,7 @@ ob_start();
                     <?php endif; ?>
 
                     <!-- СОДЕРЖАНИЕ -->
-                    <div style="font-size: 1.05rem; line-height: 1.8; margin: 2rem 0; color: #334155;">
+                    <div style="font-size: 1.05rem; line-height: 1.8; margin: 2rem 0; color: var(--text-dark);">
                         <?= $post['content'] ?>
                     </div>
                 </article>
