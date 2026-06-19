@@ -61,7 +61,7 @@ ob_start();
                         Статей пока не опубликовано
                     </div>
                 <?php else: ?>
-                    <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
                         <?php foreach ($posts as $post): ?>
                             <article class="card">
                                 <div style="display: grid; grid-template-columns: 150px 1fr; gap: 1.5rem;">
