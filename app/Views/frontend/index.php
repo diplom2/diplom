@@ -61,27 +61,27 @@ ob_start();
                         Статей пока не опубликовано
                     </div>
                 <?php else: ?>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+                    <div class="post-grid">
                         <?php foreach ($posts as $post): ?>
-                            <article class="card">
-                                <div style="display: grid; grid-template-columns: 150px 1fr; gap: 1.5rem;">
-                                    <?php
-                                        $placeholder = $categoryPlaceholders[$post['category_slug'] ?? ''] ?? null;
-                                    ?>
-                                    <div style="background: <?= $placeholder['color'] ?? '#2563eb' ?>; border-radius: 0.75rem; height: 150px; display: flex; align-items: center; justify-content: center; color: white;">
+                            <article class="card post-card">
+                                <?php
+                                    $placeholder = $categoryPlaceholders[$post['category_slug'] ?? ''] ?? null;
+                                ?>
+                                <div class="post-card-top">
+                                    <div class="post-card-badge" style="background: <?= $placeholder['color'] ?? '#2563eb' ?>;">
                                         <?php if ($placeholder): ?>
-                                            <img src="<?= Security::escape($placeholder['image']) ?>" alt="<?= Security::escape($placeholder['label']) ?>" style="width: 70px; height: 70px; object-fit: contain;">
+                                            <img src="<?= Security::escape($placeholder['image']) ?>" alt="<?= Security::escape($placeholder['label']) ?>">
                                         <?php else: ?>
-                                            <span style="font-size: 3rem;">📄</span>
+                                            <span>📄</span>
                                         <?php endif; ?>
                                     </div>
-                                    <div>
-                                        <h3 style="margin-bottom: 0.5rem;">
+                                    <div class="post-card-info">
+                                        <h3>
                                             <a href="/post/<?= Security::escape($post['slug']) ?>">
                                                 <?= Security::escape($post['title']) ?>
                                             </a>
                                         </h3>
-                                        <div style="display: flex; gap: 1rem; margin-bottom: 1rem; font-size: 0.875rem; color: #64748b;">
+                                        <div class="post-card-meta">
                                             <span>✍️ <?= Security::escape($post['author_name'] ?? 'Автор') ?></span>
                                             <span>📅 <?= date('d.m.Y', strtotime($post['created_at'])) ?></span>
                                             <?php if (!empty($post['category_name']) && !empty($post['category_slug'])): ?>
@@ -90,11 +90,13 @@ ob_start();
                                                 <span><?= Security::escape($post['category_name']) ?></span>
                                             <?php endif; ?>
                                         </div>
-                                        <p style="color: #64748b; margin-bottom: 1rem;">
-                                            <?= Security::escape(substr(strip_tags($post['content']), 0, 200)) ?>...
-                                        </p>
-                                        <a href="/post/<?= Security::escape($post['slug']) ?>" class="btn btn-primary btn-sm">Читать</a>
                                     </div>
+                                </div>
+                                <p class="post-card-excerpt">
+                                    <?= Security::escape(substr(strip_tags($post['content']), 0, 240)) ?>...
+                                </p>
+                                <div class="post-card-actions">
+                                    <a href="/post/<?= Security::escape($post['slug']) ?>" class="btn btn-primary btn-sm">Читать</a>
                                 </div>
                             </article>
                         <?php endforeach; ?>

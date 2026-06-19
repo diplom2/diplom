@@ -284,24 +284,94 @@ textarea {
    ===================================================== */
 
 .card {
-    background: rgba(18, 16, 42, 0.88);
+    background: rgba(18, 16, 42, 0.92);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: calc(var(--spacing-lg) + 0.75rem);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     transition: all 0.25s ease;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(10px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(16px);
 }
 
 .card:hover {
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
-    border-color: rgba(124, 58, 237, 0.2);
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.24);
+    border-color: rgba(124, 58, 237, 0.25);
 }
 
 .card-header {
     padding: var(--spacing-lg);
     border-bottom: 1px solid var(--border);
     margin: -var(--spacing-lg) -var(--spacing-lg) var(--spacing-lg) -var(--spacing-lg);
+}
+
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.75rem;
+}
+
+.post-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    min-height: 320px;
+}
+
+.post-card-top {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 1rem;
+    align-items: start;
+}
+
+.post-card-badge {
+    min-height: 120px;
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    overflow: hidden;
+}
+
+.post-card-badge img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+}
+
+.post-card-info h3 {
+    font-size: 1.35rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+}
+
+.post-card-info h3 a {
+    color: white;
+}
+
+.post-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.post-card-excerpt {
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+}
+
+.post-card-actions {
+    margin-top: auto;
+}
+
+.btn-sm {
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
 }
 
 .card-footer {
