@@ -39,4 +39,10 @@ RUN cat <<'EOF' >/etc/apache2/conf-available/rewrite.conf
 EOF
 RUN a2enconf rewrite
 
+# 7. Копируем и разрешаем запуск кастомного entrypoint, который использует PORT от Render
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 EXPOSE 80
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+CMD ["apache2-foreground"]
